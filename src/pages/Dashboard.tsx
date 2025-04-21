@@ -1,11 +1,10 @@
-
 import { useEffect, useState } from "react";
 import MainLayout from "@/components/Layout/MainLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import ChatInterface from "@/components/Chat/ChatInterface";
 import { Student, fetchStudents } from "@/services/api";
-import { MessageSquare, Users } from "lucide-react";
+import { MessageSquare, Users, ChartBar, GraduationCap, CalendarDays, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
@@ -61,8 +60,62 @@ const Dashboard = () => {
             </Link>
           </CardContent>
         </Card>
-        
-        {/* More dashboard cards can be added here */}
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Student Grades
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center">
+              <ChartBar className="mr-2 h-4 w-4 text-muted-foreground" />
+              <span className="text-2xl font-bold">A</span>
+            </div>
+            <p className="text-xs text-muted-foreground mt-2">Average Grade: A</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Attendance
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center">
+              <CalendarDays className="mr-2 h-4 w-4 text-muted-foreground" />
+              <span className="text-2xl font-bold">95%</span>
+            </div>
+            <p className="text-xs text-muted-foreground mt-2">Attendance Rate</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Performance
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center">
+              <BookOpen className="mr-2 h-4 w-4 text-muted-foreground" />
+              <span className="text-2xl font-bold">Excellent</span>
+            </div>
+            <p className="text-xs text-muted-foreground mt-2">Last term: Excellent</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Internships
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center">
+              <GraduationCap className="mr-2 h-4 w-4 text-muted-foreground" />
+              <span className="text-2xl font-bold">7</span>
+            </div>
+            <p className="text-xs text-muted-foreground mt-2">Active Internships</p>
+          </CardContent>
+        </Card>
       </div>
       
       {showChat && (
