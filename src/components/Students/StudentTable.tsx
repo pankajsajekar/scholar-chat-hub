@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Student, fetchStudents } from "@/services/api";
 import {
@@ -42,6 +41,17 @@ const StatusBadge = ({ status }: { status?: string }) => {
   }
 
   return <Badge variant={variant}>{status}</Badge>;
+};
+
+const InternshipBadge = ({ hasInternship, details }: { hasInternship?: boolean; details?: string }) => {
+  if (!hasInternship) {
+    return <Badge variant="secondary">No</Badge>;
+  }
+  return (
+    <Badge variant="default" title={details || ""}>
+      Yes
+    </Badge>
+  );
 };
 
 const StudentTable = () => {
@@ -90,9 +100,15 @@ const StudentTable = () => {
           <div className="p-4 space-y-4">
             {Array(5).fill(0).map((_, i) => (
               <div key={i} className="flex justify-between items-center">
-                <Skeleton className="h-6 w-1/4" />
-                <Skeleton className="h-6 w-1/4" />
-                <Skeleton className="h-6 w-1/4" />
+                <Skeleton className="h-6 w-1/6" />
+                <Skeleton className="h-6 w-1/6" />
+                <Skeleton className="h-6 w-1/6" />
+                <Skeleton className="h-6 w-1/6" />
+                <Skeleton className="h-6 w-1/6" />
+                <Skeleton className="h-6 w-1/6" />
+                <Skeleton className="h-6 w-1/6" />
+                <Skeleton className="h-6 w-1/6" />
+                <Skeleton className="h-6 w-1/6" />
               </div>
             ))}
           </div>
@@ -118,9 +134,11 @@ const StudentTable = () => {
           <TableRow>
             <TableHead>Name</TableHead>
             <TableHead>Email</TableHead>
-            <TableHead>Major</TableHead>
-            <TableHead>Grade</TableHead>
-            <TableHead>Enrollment Date</TableHead>
+            <TableHead>Department</TableHead>
+            <TableHead>Grade (GPA)</TableHead>
+            <TableHead>Attendance</TableHead>
+            <TableHead>Performance</TableHead>
+            <TableHead>Internships</TableHead>
             <TableHead>Status</TableHead>
           </TableRow>
         </TableHeader>
@@ -132,14 +150,33 @@ const StudentTable = () => {
                 className="cursor-pointer hover:bg-blue-50"
                 onClick={() => navigate(`/students/${student.id}`)}
               >
-                <TableCell className="font-medium">{student.name}</TableCell>
+                <TableCell className="font-medium flex items-center gap-2">
+                  {student.profile_picture && (
+                    <img
+                      src={student.profile_picture}
+                      alt={student.name}
+                      className="w-8 h-8 rounded-full object-cover border"
+                    />
+                  )}
+                  {student.name}
+                </TableCell>
                 <TableCell>{student.email}</TableCell>
-                <TableCell>{student.major || "-"}</TableCell>
-                <TableCell>{student.grade || "-"}</TableCell>
+                <TableCell>{student.department || "-"}</TableCell>
+                <TableCell>{student.gpa || student.grade || "-"}</TableCell>
                 <TableCell>
-                  {student.enrollment_date 
-                    ? new Date(student.enrollment_date).toLocaleDateString() 
+                  {student.academic_status || "-"}
+                </TableCell>
+                <TableCell>
+                  {student.gpa
+                    ? Number(student.gpa) >= 3.5
+                      ? "Excellent"
+                      : Number(student.gpa) >= 2.0
+                        ? "Average"
+                        : "Poor"
                     : "-"}
+                </TableCell>
+                <TableCell>
+                  <InternshipBadge hasInternship={student.has_internship} details={student.internship_details} />
                 </TableCell>
                 <TableCell>
                   <StatusBadge status={student.status} />
@@ -148,7 +185,7 @@ const StudentTable = () => {
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={6} className="text-center py-4">
+              <TableCell colSpan={8} className="text-center py-4">
                 No students found.
               </TableCell>
             </TableRow>
