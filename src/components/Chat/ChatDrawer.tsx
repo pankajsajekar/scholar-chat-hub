@@ -1,6 +1,12 @@
 
 import React, { useEffect, useRef, useState } from "react";
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerClose } from "@/components/ui/drawer";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetClose,
+} from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Send, Bot } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -111,18 +117,25 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({ open, onOpenChange }) =>
     }
   };
 
+  // Use Sheet as right-side drawer
   return (
-    <Drawer open={open} onOpenChange={onOpenChange} shouldScaleBackground>
-      <DrawerContent className="max-w-lg mx-auto w-full rounded-t-2xl">
-        <DrawerHeader className="flex flex-row items-center gap-2 border-b pb-1">
-          <Bot className="w-5 h-5 text-primary" />
-          <DrawerTitle className="flex-1 text-xl">Chatbot</DrawerTitle>
-          <DrawerClose asChild>
+    <Sheet open={open} onOpenChange={onOpenChange}>
+      <SheetContent
+        side="right"
+        className="p-0 flex flex-col h-screen max-w-full w-full sm:w-[90vw] md:w-[33vw] lg:w-[25vw] xl:w-[22vw] shadow-2xl border-l bg-background"
+        // Responsive: ~90vw mobile, ~33vw tablet, ~25vw desktop
+      >
+        <SheetHeader className="flex flex-row items-center gap-2 border-b pb-1 px-3 pt-2">
+          <div className="flex items-center gap-2">
+            <Bot className="w-5 h-5 text-primary" />
+            <SheetTitle className="flex-1 text-xl">Chatbot</SheetTitle>
+          </div>
+          <SheetClose asChild>
             <Button variant="ghost" size="icon" aria-label="Close">
               ×
             </Button>
-          </DrawerClose>
-        </DrawerHeader>
+          </SheetClose>
+        </SheetHeader>
         {showStatusMsg && (
           <div
             className={cn(
@@ -135,14 +148,14 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({ open, onOpenChange }) =>
             {showStatusMsg}
           </div>
         )}
-        <div className="flex flex-col h-[420px] pb-2">
+        <div className="flex flex-col flex-1 pb-2 min-h-0 h-0">
           <ScrollArea ref={scrollRef} className="flex-1 pr-2 overflow-y-auto">
             <div className="flex flex-col gap-2 py-2">
               {messages.map((msg, idx) => (
                 <div
                   key={idx}
                   className={cn(
-                    "max-w-[78%] px-3 py-2 rounded-lg text-sm break-words",
+                    "max-w-[80%] px-3 py-2 rounded-lg text-sm break-words",
                     msg.sender === "bot"
                       ? "self-start bg-muted border border-gray-200 shadow"
                       : "self-end bg-primary text-primary-foreground"
@@ -169,7 +182,7 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({ open, onOpenChange }) =>
             </div>
           </ScrollArea>
           <form
-            className="flex items-center gap-2 mt-auto px-2"
+            className="flex items-center gap-2 mt-auto px-2 py-2 border-t"
             onSubmit={e => {
               e.preventDefault();
               sendMessage();
@@ -195,9 +208,10 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({ open, onOpenChange }) =>
             </Button>
           </form>
         </div>
-      </DrawerContent>
-    </Drawer>
+      </SheetContent>
+    </Sheet>
   );
 };
 
 export default ChatDrawer;
+
