@@ -20,12 +20,13 @@ import {
 } from "@/components/ui/pagination";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useNavigate } from "react-router-dom";
 
 const StatusBadge = ({ status }: { status?: string }) => {
   if (!status) return null;
-  
+
   let variant: "default" | "destructive" | "outline" | "secondary" = "default";
-  
+
   switch (status.toLowerCase()) {
     case "active":
       variant = "default";
@@ -39,7 +40,7 @@ const StatusBadge = ({ status }: { status?: string }) => {
     default:
       variant = "outline";
   }
-  
+
   return <Badge variant={variant}>{status}</Badge>;
 };
 
@@ -48,9 +49,10 @@ const StudentTable = () => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [error, setError] = useState<string | null>(null);
-  
+  const navigate = useNavigate();
+
   const studentsPerPage = 10;
-  
+
   useEffect(() => {
     const getStudents = async () => {
       try {
@@ -65,18 +67,18 @@ const StudentTable = () => {
         setLoading(false);
       }
     };
-    
+
     getStudents();
   }, []);
-  
+
   // Calculate pagination
   const indexOfLastStudent = currentPage * studentsPerPage;
   const indexOfFirstStudent = indexOfLastStudent - studentsPerPage;
   const currentStudents = students.slice(indexOfFirstStudent, indexOfLastStudent);
   const totalPages = Math.ceil(students.length / studentsPerPage);
-  
+
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-  
+
   if (loading) {
     return (
       <div>
@@ -98,7 +100,7 @@ const StudentTable = () => {
       </div>
     );
   }
-  
+
   if (error) {
     return (
       <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative" role="alert">
@@ -107,7 +109,7 @@ const StudentTable = () => {
       </div>
     );
   }
-  
+
   return (
     <div>
       <Table>
@@ -125,7 +127,11 @@ const StudentTable = () => {
         <TableBody>
           {currentStudents.length > 0 ? (
             currentStudents.map((student) => (
-              <TableRow key={student.id}>
+              <TableRow
+                key={student.id}
+                className="cursor-pointer hover:bg-blue-50"
+                onClick={() => navigate(`/students/${student.id}`)}
+              >
                 <TableCell className="font-medium">{student.name}</TableCell>
                 <TableCell>{student.email}</TableCell>
                 <TableCell>{student.major || "-"}</TableCell>
@@ -149,7 +155,7 @@ const StudentTable = () => {
           )}
         </TableBody>
       </Table>
-      
+
       {students.length > studentsPerPage && (
         <Pagination className="mt-4">
           <PaginationContent>
@@ -159,7 +165,7 @@ const StudentTable = () => {
                 className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
               />
             </PaginationItem>
-            
+
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <PaginationItem key={page}>
                 <PaginationLink
@@ -170,7 +176,7 @@ const StudentTable = () => {
                 </PaginationLink>
               </PaginationItem>
             ))}
-            
+
             <PaginationItem>
               <PaginationNext 
                 onClick={() => paginate(Math.min(totalPages, currentPage + 1))}
