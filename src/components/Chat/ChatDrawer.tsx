@@ -214,4 +214,3 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({ open, onOpenChange }) =>
 };
 
 export default ChatDrawer;
-
