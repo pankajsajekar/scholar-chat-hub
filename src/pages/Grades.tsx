@@ -1,15 +1,15 @@
 
 import { useQuery } from "@tanstack/react-query";
-import { fetchCourses } from "@/services/api";
+import { fetchGrades } from "@/services/api";
 import MainLayout from "@/components/Layout/MainLayout";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
-import { book } from "lucide-react";
+import { award } from "lucide-react";
 
-const Courses = () => {
-  const { data: courses, isLoading } = useQuery({
-    queryKey: ["courses"],
-    queryFn: fetchCourses,
+const Grades = () => {
+  const { data: grades, isLoading } = useQuery({
+    queryKey: ["grades"],
+    queryFn: fetchGrades,
   });
 
   if (isLoading) {
@@ -30,29 +30,25 @@ const Courses = () => {
   return (
     <MainLayout>
       <div className="flex items-center gap-2 mb-6">
-        <book className="h-6 w-6 text-primary" />
-        <h1 className="text-3xl font-bold text-gray-800">Courses</h1>
+        <award className="h-6 w-6 text-primary" />
+        <h1 className="text-3xl font-bold text-gray-800">Grades</h1>
       </div>
       
       <div className="bg-white shadow rounded-lg">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Code</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Credits</TableHead>
-              <TableHead>Department</TableHead>
-              <TableHead>Instructor</TableHead>
+              <TableHead>Course</TableHead>
+              <TableHead>Grade</TableHead>
+              <TableHead>Semester</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {courses?.map((course) => (
-              <TableRow key={course.id}>
-                <TableCell className="font-medium">{course.code}</TableCell>
-                <TableCell>{course.name}</TableCell>
-                <TableCell>{course.credits}</TableCell>
-                <TableCell>{course.department || "N/A"}</TableCell>
-                <TableCell>{course.instructor || "N/A"}</TableCell>
+            {grades?.map((grade) => (
+              <TableRow key={grade.id}>
+                <TableCell>{grade.course_name || `Course ${grade.course_id}`}</TableCell>
+                <TableCell className="font-medium">{grade.grade}</TableCell>
+                <TableCell>{grade.semester}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -62,4 +58,4 @@ const Courses = () => {
   );
 };
 
-export default Courses;
+export default Grades;

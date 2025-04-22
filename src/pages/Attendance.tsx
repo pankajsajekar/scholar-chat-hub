@@ -1,15 +1,15 @@
 
 import { useQuery } from "@tanstack/react-query";
-import { fetchCourses } from "@/services/api";
+import { fetchAttendance } from "@/services/api";
 import MainLayout from "@/components/Layout/MainLayout";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
-import { book } from "lucide-react";
+import { calendar } from "lucide-react";
 
-const Courses = () => {
-  const { data: courses, isLoading } = useQuery({
-    queryKey: ["courses"],
-    queryFn: fetchCourses,
+const Attendance = () => {
+  const { data: attendance, isLoading } = useQuery({
+    queryKey: ["attendance"],
+    queryFn: fetchAttendance,
   });
 
   if (isLoading) {
@@ -30,29 +30,25 @@ const Courses = () => {
   return (
     <MainLayout>
       <div className="flex items-center gap-2 mb-6">
-        <book className="h-6 w-6 text-primary" />
-        <h1 className="text-3xl font-bold text-gray-800">Courses</h1>
+        <calendar className="h-6 w-6 text-primary" />
+        <h1 className="text-3xl font-bold text-gray-800">Attendance</h1>
       </div>
       
       <div className="bg-white shadow rounded-lg">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Code</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Credits</TableHead>
-              <TableHead>Department</TableHead>
-              <TableHead>Instructor</TableHead>
+              <TableHead>Course</TableHead>
+              <TableHead>Date</TableHead>
+              <TableHead>Status</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {courses?.map((course) => (
-              <TableRow key={course.id}>
-                <TableCell className="font-medium">{course.code}</TableCell>
-                <TableCell>{course.name}</TableCell>
-                <TableCell>{course.credits}</TableCell>
-                <TableCell>{course.department || "N/A"}</TableCell>
-                <TableCell>{course.instructor || "N/A"}</TableCell>
+            {attendance?.map((record) => (
+              <TableRow key={record.id}>
+                <TableCell>{record.course_name || `Course ${record.course_id}`}</TableCell>
+                <TableCell>{new Date(record.date).toLocaleDateString()}</TableCell>
+                <TableCell>{record.status}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -62,4 +58,4 @@ const Courses = () => {
   );
 };
 
-export default Courses;
+export default Attendance;

@@ -1,4 +1,3 @@
-
 /**
  * API service for handling HTTP requests
  */
@@ -40,6 +39,53 @@ export interface Student {
   grade?: string;
 }
 
+export interface Course {
+  id: number;
+  name: string;
+  code: string;
+  description?: string;
+  credits: number;
+  department?: string;
+  instructor?: string;
+}
+
+export interface Grade {
+  id: number;
+  student_id: number;
+  course_id: number;
+  grade: string;
+  semester: string;
+  course_name?: string;
+}
+
+export interface Attendance {
+  id: number;
+  student_id: number;
+  course_id: number;
+  date: string;
+  status: string;
+  course_name?: string;
+}
+
+export interface Internship {
+  id: number;
+  student_id: number;
+  company: string;
+  position: string;
+  start_date: string;
+  end_date: string;
+  status: string;
+}
+
+export interface Performance {
+  id: number;
+  student_id: number;
+  semester: string;
+  gpa: number;
+  academic_status: string;
+  remarks?: string;
+}
+
 export const fetchStudents = async (): Promise<Student[]> => {
   try {
     const response = await fetch(`${BASE_URL}/api/students/`);
@@ -63,5 +109,60 @@ export const fetchStudentById = async (id: number): Promise<Student | null> => {
   } catch (error) {
     console.error(`Failed to fetch student with id ${id}:`, error);
     return null;
+  }
+};
+
+export const fetchCourses = async (): Promise<Course[]> => {
+  try {
+    const response = await fetch(`${BASE_URL}/api/courses/`);
+    if (!response.ok) throw new Error(`Error: ${response.status}`);
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to fetch courses:", error);
+    return [];
+  }
+};
+
+export const fetchGrades = async (): Promise<Grade[]> => {
+  try {
+    const response = await fetch(`${BASE_URL}/api/grades/`);
+    if (!response.ok) throw new Error(`Error: ${response.status}`);
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to fetch grades:", error);
+    return [];
+  }
+};
+
+export const fetchAttendance = async (): Promise<Attendance[]> => {
+  try {
+    const response = await fetch(`${BASE_URL}/api/attendance/`);
+    if (!response.ok) throw new Error(`Error: ${response.status}`);
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to fetch attendance:", error);
+    return [];
+  }
+};
+
+export const fetchInternships = async (): Promise<Internship[]> => {
+  try {
+    const response = await fetch(`${BASE_URL}/api/internships/`);
+    if (!response.ok) throw new Error(`Error: ${response.status}`);
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to fetch internships:", error);
+    return [];
+  }
+};
+
+export const fetchPerformance = async (): Promise<Performance[]> => {
+  try {
+    const response = await fetch(`${BASE_URL}/api/performance/`);
+    if (!response.ok) throw new Error(`Error: ${response.status}`);
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to fetch performance:", error);
+    return [];
   }
 };
