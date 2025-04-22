@@ -61,13 +61,13 @@ const StudentDetails = () => {
                   <div className="font-medium">{student.email}</div>
                 </div>
                 <div>
-                  <div className="text-sm text-muted-foreground mb-1">Major</div>
-                  <div className="font-medium">{student.major || "-"}</div>
+                  <div className="text-sm text-muted-foreground mb-1">Department</div>
+                  <div className="font-medium">{student.department || "-"}</div>
                 </div>
                 <div>
-                  <div className="text-sm text-muted-foreground mb-1">Enrollment Date</div>
+                  <div className="text-sm text-muted-foreground mb-1">Enrollment Year</div>
                   <div className="font-medium">
-                    {student.enrollment_date ? new Date(student.enrollment_date).toLocaleDateString() : "-"}
+                    {student.enrollment_year || "-"}
                   </div>
                 </div>
                 <div>
@@ -87,7 +87,7 @@ const StudentDetails = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{student.grade || "-"}</div>
+                <div className="text-2xl font-bold">{student.gpa || student.grade || "-"}</div>
                 <p className="text-xs text-muted-foreground mt-2">Latest grade achieved.</p>
               </CardContent>
             </Card>
@@ -99,9 +99,9 @@ const StudentDetails = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">N/A</div>
+                <div className="text-2xl font-bold">{student.academic_status || "N/A"}</div>
                 <p className="text-xs text-muted-foreground mt-2">
-                  Attendance data not available.
+                  {student.academic_status ? "Current academic standing." : "Attendance data not available."}
                 </p>
               </CardContent>
             </Card>
@@ -113,9 +113,17 @@ const StudentDetails = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">Excellent</div>
+                <div className="text-2xl font-bold">
+                  {student.gpa
+                    ? Number(student.gpa) >= 3.5
+                      ? "Excellent"
+                      : Number(student.gpa) >= 2.0
+                        ? "Average"
+                        : "Poor"
+                    : "-"}
+                </div>
                 <p className="text-xs text-muted-foreground mt-2">
-                  Academic performance summary here.
+                  Academic performance based on GPA.
                 </p>
               </CardContent>
             </Card>
@@ -127,8 +135,10 @@ const StudentDetails = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">0</div>
-                <p className="text-xs text-muted-foreground mt-2">Internship details unavailable.</p>
+                <div className="text-2xl font-bold">{student.has_internship ? "Yes" : "No"}</div>
+                <p className="text-xs text-muted-foreground mt-2">
+                  {student.internship_details || (student.has_internship ? "Internship details not specified." : "No internship recorded.")}
+                </p>
               </CardContent>
             </Card>
           </div>
