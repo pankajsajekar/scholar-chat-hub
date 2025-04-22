@@ -1,10 +1,9 @@
+
 import { useState, useEffect } from "react";
 import { Student, fetchStudents } from "@/services/api";
 import {
   Table,
-  TableBody,
   TableCaption,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
@@ -17,49 +16,14 @@ import {
   PaginationNext, 
   PaginationPrevious 
 } from "@/components/ui/pagination";
-import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useNavigate } from "react-router-dom";
-
-const StatusBadge = ({ status }: { status?: string }) => {
-  if (!status) return null;
-
-  let variant: "default" | "destructive" | "outline" | "secondary" = "default";
-
-  switch (status.toLowerCase()) {
-    case "active":
-      variant = "default";
-      break;
-    case "inactive":
-      variant = "secondary";
-      break;
-    case "suspended":
-      variant = "destructive";
-      break;
-    default:
-      variant = "outline";
-  }
-
-  return <Badge variant={variant}>{status}</Badge>;
-};
-
-const InternshipBadge = ({ hasInternship, details }: { hasInternship?: boolean; details?: string }) => {
-  if (!hasInternship) {
-    return <Badge variant="secondary">No</Badge>;
-  }
-  return (
-    <Badge variant="default" title={details || ""}>
-      Yes
-    </Badge>
-  );
-};
+import { StudentList } from "./StudentList";
+import { StudentTableSkeleton } from "./StudentTableSkeleton";
 
 const StudentTable = () => {
   const [students, setStudents] = useState<Student[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
 
   const studentsPerPage = 10;
 
@@ -90,31 +54,7 @@ const StudentTable = () => {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   if (loading) {
-    return (
-      <div>
-        <div className="flex items-center justify-between mb-4">
-          <Skeleton className="h-10 w-1/4" />
-          <Skeleton className="h-10 w-1/4" />
-        </div>
-        <div className="border rounded-md">
-          <div className="p-4 space-y-4">
-            {Array(5).fill(0).map((_, i) => (
-              <div key={i} className="flex justify-between items-center">
-                <Skeleton className="h-6 w-1/6" />
-                <Skeleton className="h-6 w-1/6" />
-                <Skeleton className="h-6 w-1/6" />
-                <Skeleton className="h-6 w-1/6" />
-                <Skeleton className="h-6 w-1/6" />
-                <Skeleton className="h-6 w-1/6" />
-                <Skeleton className="h-6 w-1/6" />
-                <Skeleton className="h-6 w-1/6" />
-                <Skeleton className="h-6 w-1/6" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
+    return <StudentTableSkeleton />;
   }
 
   if (error) {
@@ -142,55 +82,7 @@ const StudentTable = () => {
             <TableHead>Status</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
-          {currentStudents.length > 0 ? (
-            currentStudents.map((student) => (
-              <TableRow
-                key={student.id}
-                className="cursor-pointer hover:bg-blue-50"
-                onClick={() => navigate(`/students/${student.id}`)}
-              >
-                <TableCell className="font-medium flex items-center gap-2">
-                  {student.profile_picture && (
-                    <img
-                      src={student.profile_picture}
-                      alt={student.name}
-                      className="w-8 h-8 rounded-full object-cover border"
-                    />
-                  )}
-                  {student.name}
-                </TableCell>
-                <TableCell>{student.email}</TableCell>
-                <TableCell>{student.department || "-"}</TableCell>
-                <TableCell>{student.gpa || student.grade || "-"}</TableCell>
-                <TableCell>
-                  {student.academic_status || "-"}
-                </TableCell>
-                <TableCell>
-                  {student.gpa
-                    ? Number(student.gpa) >= 3.5
-                      ? "Excellent"
-                      : Number(student.gpa) >= 2.0
-                        ? "Average"
-                        : "Poor"
-                    : "-"}
-                </TableCell>
-                <TableCell>
-                  <InternshipBadge hasInternship={student.has_internship} details={student.internship_details} />
-                </TableCell>
-                <TableCell>
-                  <StatusBadge status={student.status} />
-                </TableCell>
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={8} className="text-center py-4">
-                No students found.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
+        <StudentList students={currentStudents} />
       </Table>
 
       {students.length > studentsPerPage && (
