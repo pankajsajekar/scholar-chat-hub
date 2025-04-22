@@ -1,7 +1,6 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { MessageSquare, Users, Search } from "lucide-react";
+import { MessageSquare, Users, Search, Book, Award, Calendar, TrendingUp, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
@@ -62,6 +61,38 @@ const Navbar = () => {
                 className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
               >
                 Students
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/grades"
+                className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+              >
+                Grades
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/attendance"
+                className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+              >
+                Attendance
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/performance"
+                className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+              >
+                Performance
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/internships"
+                className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+              >
+                Internships
               </Link>
             </li>
             <li>

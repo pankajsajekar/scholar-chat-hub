@@ -51,20 +51,32 @@ export interface Course {
 
 export interface Grade {
   id: number;
-  student_id: number;
-  course_id: number;
+  created_at: string;
+  updated_at: string;
+  is_deleted: boolean;
   grade: string;
+  marks_obtained: string;
+  total_marks: string;
+  exam_type: string;
+  remarks: string | null;
   semester: string;
-  course_name?: string;
+  academic_year: string;
+  student: number;
+  course: number;
 }
 
 export interface Attendance {
   id: number;
-  student_id: number;
-  course_id: number;
+  created_at: string;
+  updated_at: string;
+  is_deleted: boolean;
+  total_classes: number;
+  attended_classes: number;
   date: string;
   status: string;
-  course_name?: string;
+  remarks: string | null;
+  student: number;
+  course: number;
 }
 
 export interface Internship {
@@ -79,11 +91,17 @@ export interface Internship {
 
 export interface Performance {
   id: number;
-  student_id: number;
+  created_at: string;
+  updated_at: string;
+  is_deleted: boolean;
+  gpa: string;
+  status: string;
   semester: string;
-  gpa: number;
-  academic_status: string;
-  remarks?: string;
+  academic_year: string;
+  overall_gpa: string | null;
+  remarks: string | null;
+  student: number;
+  course: number;
 }
 
 export const fetchStudents = async (): Promise<Student[]> => {

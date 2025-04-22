@@ -39,17 +39,21 @@ const Performance = () => {
           <TableHeader>
             <TableRow>
               <TableHead>Semester</TableHead>
+              <TableHead>Year</TableHead>
               <TableHead>GPA</TableHead>
-              <TableHead>Academic Status</TableHead>
+              <TableHead>Overall GPA</TableHead>
+              <TableHead>Status</TableHead>
               <TableHead>Remarks</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {performance?.map((record) => (
               <TableRow key={record.id}>
-                <TableCell className="font-medium">{record.semester}</TableCell>
+                <TableCell>{record.semester}</TableCell>
+                <TableCell>{record.academic_year}</TableCell>
                 <TableCell>{record.gpa}</TableCell>
-                <TableCell>{record.academic_status}</TableCell>
+                <TableCell>{record.overall_gpa || "N/A"}</TableCell>
+                <TableCell>{record.status}</TableCell>
                 <TableCell>{record.remarks || "N/A"}</TableCell>
               </TableRow>
             ))}

@@ -38,17 +38,23 @@ const Grades = () => {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Course</TableHead>
               <TableHead>Grade</TableHead>
+              <TableHead>Marks</TableHead>
+              <TableHead>Exam Type</TableHead>
               <TableHead>Semester</TableHead>
+              <TableHead>Year</TableHead>
+              <TableHead>Remarks</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {grades?.map((grade) => (
               <TableRow key={grade.id}>
-                <TableCell>{grade.course_name || `Course ${grade.course_id}`}</TableCell>
                 <TableCell className="font-medium">{grade.grade}</TableCell>
+                <TableCell>{grade.marks_obtained}/{grade.total_marks}</TableCell>
+                <TableCell>{grade.exam_type}</TableCell>
                 <TableCell>{grade.semester}</TableCell>
+                <TableCell>{grade.academic_year}</TableCell>
+                <TableCell>{grade.remarks || "N/A"}</TableCell>
               </TableRow>
             ))}
           </TableBody>

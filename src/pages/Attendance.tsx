@@ -38,17 +38,21 @@ const Attendance = () => {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Course</TableHead>
               <TableHead>Date</TableHead>
               <TableHead>Status</TableHead>
+              <TableHead>Classes Attended</TableHead>
+              <TableHead>Total Classes</TableHead>
+              <TableHead>Remarks</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {attendance?.map((record) => (
               <TableRow key={record.id}>
-                <TableCell>{record.course_name || `Course ${record.course_id}`}</TableCell>
                 <TableCell>{new Date(record.date).toLocaleDateString()}</TableCell>
                 <TableCell>{record.status}</TableCell>
+                <TableCell>{record.attended_classes}</TableCell>
+                <TableCell>{record.total_classes}</TableCell>
+                <TableCell>{record.remarks || "N/A"}</TableCell>
               </TableRow>
             ))}
           </TableBody>
