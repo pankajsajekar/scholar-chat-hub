@@ -1,4 +1,3 @@
-
 import MainLayout from "@/components/Layout/MainLayout";
 import StudentTable from "@/components/Students/StudentTable";
 import { Button } from "@/components/ui/button";
@@ -11,10 +10,10 @@ const Students = () => {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-gray-800">Students</h1>
         <div className="flex gap-2">
-          <Button className="flex items-center">
+          {/* <Button className="flex items-center">
             <Plus className="mr-2 h-4 w-4" />
             Add Student
-          </Button>
+          </Button> */}
         </div>
       </div>
       <div className="bg-white shadow rounded-lg p-6">

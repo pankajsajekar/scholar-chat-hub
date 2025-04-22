@@ -1,11 +1,14 @@
+
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { MessageSquare, Users, Search, Book, Award, Calendar, TrendingUp, Briefcase } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { MessageSquare, Users, Search, Book, Award, Calendar, TrendingUp, Briefcase, GraduationCap, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ChatDrawer from "@/components/Chat/ChatDrawer";
 
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
   return (
     <nav className="bg-white border-b border-gray-200 px-4 py-2.5 fixed left-0 right-0 top-0 z-50">
       <div className="flex flex-wrap justify-between items-center">
@@ -31,7 +34,7 @@ const Navbar = () => {
             />
           </div>
           
-          <Button variant="outline" className="hidden md:flex">
+          <Button variant="outline" className="hidden md:flex" onClick={() => setIsChatOpen(true)}>
             <MessageSquare className="mr-2 h-4 w-4" />
             Chat Assistant
           </Button>
@@ -96,18 +99,25 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link
-                to="/chat"
-                className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:hidden"
+              {/* Mobile only: Chat Assistant (should not duplicate Sheet, only open) */}
+              <Button
+                onClick={() => setIsChatOpen(true)}
+                variant="outline"
+                className="block md:hidden py-2 pr-4 pl-3 border-b border-gray-100 w-full text-left"
+                type="button"
               >
+                <MessageSquare className="mr-2 h-4 w-4" />
                 Chat Assistant
-              </Link>
+              </Button>
             </li>
           </ul>
         </div>
       </div>
+      {/* Chat drawer should render here to be global and persistent */}
+      <ChatDrawer open={isChatOpen} onOpenChange={setIsChatOpen} />
     </nav>
   );
 };
 
 export default Navbar;
+
