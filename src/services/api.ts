@@ -81,12 +81,21 @@ export interface Attendance {
 
 export interface Internship {
   id: number;
-  student_id: number;
-  company: string;
-  position: string;
+  student_id?: number;
+  company?: string;
+  position?: string;
   start_date: string;
   end_date: string;
-  status: string;
+  status?: string;
+  
+  // New fields based on the API response
+  created_at?: string;
+  updated_at?: string;
+  is_deleted?: boolean;
+  company_name?: string;
+  role?: string;
+  description?: string;
+  student?: number;
 }
 
 export interface Performance {
@@ -104,6 +113,14 @@ export interface Performance {
   course: number;
 }
 
+export interface StudentDetails {
+  student: Student;
+  grades: Grade[];
+  attendance: Attendance[];
+  performance: Performance[];
+  internships: Internship[];
+}
+
 export const fetchStudents = async (): Promise<Student[]> => {
   try {
     const response = await fetch(`${BASE_URL}/api/students/`);
@@ -117,9 +134,9 @@ export const fetchStudents = async (): Promise<Student[]> => {
   }
 };
 
-export const fetchStudentById = async (id: number): Promise<Student | null> => {
+export const fetchStudentById = async (id: number): Promise<StudentDetails | null> => {
   try {
-    const response = await fetch(`${BASE_URL}/api/students/${id}`);
+    const response = await fetch(`${BASE_URL}/api/students/${id}/details`);
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
     }
