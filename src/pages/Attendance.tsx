@@ -4,7 +4,7 @@ import { fetchAttendance } from "@/services/api";
 import MainLayout from "@/components/Layout/MainLayout";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
-import { calendar } from "lucide-react";
+import { Calendar } from "lucide-react";
 
 const Attendance = () => {
   const { data: attendance, isLoading } = useQuery({
@@ -30,7 +30,7 @@ const Attendance = () => {
   return (
     <MainLayout>
       <div className="flex items-center gap-2 mb-6">
-        <calendar className="h-6 w-6 text-primary" />
+        <Calendar className="h-6 w-6 text-primary" />
         <h1 className="text-3xl font-bold text-gray-800">Attendance</h1>
       </div>
       

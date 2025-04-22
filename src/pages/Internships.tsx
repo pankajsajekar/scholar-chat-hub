@@ -4,7 +4,7 @@ import { fetchInternships } from "@/services/api";
 import MainLayout from "@/components/Layout/MainLayout";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
-import { briefcase } from "lucide-react";
+import { Briefcase } from "lucide-react";
 
 const Internships = () => {
   const { data: internships, isLoading } = useQuery({
@@ -30,7 +30,7 @@ const Internships = () => {
   return (
     <MainLayout>
       <div className="flex items-center gap-2 mb-6">
-        <briefcase className="h-6 w-6 text-primary" />
+        <Briefcase className="h-6 w-6 text-primary" />
         <h1 className="text-3xl font-bold text-gray-800">Internships</h1>
       </div>
       

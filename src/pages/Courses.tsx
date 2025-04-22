@@ -4,7 +4,7 @@ import { fetchCourses } from "@/services/api";
 import MainLayout from "@/components/Layout/MainLayout";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
-import { book } from "lucide-react";
+import { Book } from "lucide-react";
 
 const Courses = () => {
   const { data: courses, isLoading } = useQuery({
@@ -30,7 +30,7 @@ const Courses = () => {
   return (
     <MainLayout>
       <div className="flex items-center gap-2 mb-6">
-        <book className="h-6 w-6 text-primary" />
+        <Book className="h-6 w-6 text-primary" />
         <h1 className="text-3xl font-bold text-gray-800">Courses</h1>
       </div>
       

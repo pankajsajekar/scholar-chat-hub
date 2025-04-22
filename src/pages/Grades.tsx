@@ -4,7 +4,7 @@ import { fetchGrades } from "@/services/api";
 import MainLayout from "@/components/Layout/MainLayout";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
-import { award } from "lucide-react";
+import { Award } from "lucide-react";
 
 const Grades = () => {
   const { data: grades, isLoading } = useQuery({
@@ -30,7 +30,7 @@ const Grades = () => {
   return (
     <MainLayout>
       <div className="flex items-center gap-2 mb-6">
-        <award className="h-6 w-6 text-primary" />
+        <Award className="h-6 w-6 text-primary" />
         <h1 className="text-3xl font-bold text-gray-800">Grades</h1>
       </div>
       

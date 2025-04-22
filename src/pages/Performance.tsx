@@ -4,7 +4,7 @@ import { fetchPerformance } from "@/services/api";
 import MainLayout from "@/components/Layout/MainLayout";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
-import { "trending-up" as TrendingUp } from "lucide-react";
+import { TrendingUp } from "lucide-react";
 
 const Performance = () => {
   const { data: performance, isLoading } = useQuery({
