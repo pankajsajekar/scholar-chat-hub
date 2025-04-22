@@ -330,7 +330,7 @@ const StudentDetails = () => {
                   <TableHeader>
                     <TableRow>
                       <TableHead>Company</TableHead>
-                      <TableHead>Position</TableHead>
+                      <TableHead>Role</TableHead>
                       <TableHead>Duration</TableHead>
                       <TableHead>Description</TableHead>
                     </TableRow>
@@ -341,7 +341,7 @@ const StudentDetails = () => {
                         <TableCell className="font-medium">{internship.company_name || internship.company || "-"}</TableCell>
                         <TableCell>{internship.role || internship.position || "-"}</TableCell>
                         <TableCell>
-                          {new Date(internship.start_date).toLocaleDateString()} - {new Date(internship.end_date).toLocaleDateString()}
+                          {internship.start_date ? new Date(internship.start_date).toLocaleDateString() : "-"} - {internship.end_date ? new Date(internship.end_date).toLocaleDateString() : "-"}
                         </TableCell>
                         <TableCell className="max-w-xs truncate">{internship.description || "-"}</TableCell>
                       </TableRow>
