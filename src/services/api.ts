@@ -134,9 +134,10 @@ export const fetchStudents = async (): Promise<Student[]> => {
   }
 };
 
+// 1. Update to fetch from /api/student-profiles/:id/
 export const fetchStudentById = async (id: number): Promise<StudentDetails | null> => {
   try {
-    const response = await fetch(`${BASE_URL}/api/students/${id}/details`);
+    const response = await fetch(`${BASE_URL}/api/student-profiles/${id}/`);
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
     }
