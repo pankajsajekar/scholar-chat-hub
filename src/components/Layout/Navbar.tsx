@@ -39,7 +39,8 @@ const Navbar = () => {
             Chat Assistant
           </Button>
         </div>
-        
+
+        {/* Navigation links */}
         <div className="flex items-center md:order-1">
           <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
             <li>
@@ -98,22 +99,11 @@ const Navbar = () => {
                 Internships
               </Link>
             </li>
-            <li>
-              {/* Mobile only: Chat Assistant (should not duplicate Sheet, only open) */}
-              <Button
-                onClick={() => setIsChatOpen(true)}
-                variant="outline"
-                className="block md:hidden py-2 pr-4 pl-3 border-b border-gray-100 w-full text-left"
-                type="button"
-              >
-                <MessageSquare className="mr-2 h-4 w-4" />
-                Chat Assistant
-              </Button>
-            </li>
+            {/* Chat Assistant only shows in Navbar, NOT here for mobile */}
           </ul>
         </div>
       </div>
-      {/* Chat drawer should render here to be global and persistent */}
+      {/* Only one place for the Chat Assistant Drawer, inside Navbar for global use */}
       <ChatDrawer open={isChatOpen} onOpenChange={setIsChatOpen} />
     </nav>
   );
