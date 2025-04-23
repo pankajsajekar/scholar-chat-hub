@@ -38,6 +38,7 @@ const Attendance = () => {
         <Table>
           <TableHeader>
             <TableRow>
+              <TableHead>Student</TableHead>
               <TableHead>Date</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Classes Attended</TableHead>
@@ -48,6 +49,7 @@ const Attendance = () => {
           <TableBody>
             {attendance?.map((record) => (
               <TableRow key={record.id}>
+                <TableCell>{record.student_name}</TableCell>
                 <TableCell>{new Date(record.date).toLocaleDateString()}</TableCell>
                 <TableCell>{record.status}</TableCell>
                 <TableCell>{record.attended_classes}</TableCell>

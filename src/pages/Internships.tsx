@@ -38,6 +38,7 @@ const Internships = () => {
         <Table>
           <TableHeader>
             <TableRow>
+              <TableHead>Student</TableHead>
               <TableHead>Company</TableHead>
               <TableHead>Role</TableHead>
               <TableHead>Duration</TableHead>
@@ -47,6 +48,7 @@ const Internships = () => {
           <TableBody>
             {internships?.map((internship) => (
               <TableRow key={internship.id}>
+                <TableCell className="font-medium">{internship.student_name}</TableCell>
                 <TableCell className="font-medium">{internship.company_name || internship.company || "-"}</TableCell>
                 <TableCell>{internship.role || internship.position || "-"}</TableCell>
                 <TableCell>

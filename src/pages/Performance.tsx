@@ -38,6 +38,7 @@ const Performance = () => {
         <Table>
           <TableHeader>
             <TableRow>
+              <TableHead>Student</TableHead>
               <TableHead>Semester</TableHead>
               <TableHead>Year</TableHead>
               <TableHead>GPA</TableHead>
@@ -49,6 +50,7 @@ const Performance = () => {
           <TableBody>
             {performance?.map((record) => (
               <TableRow key={record.id}>
+                <TableCell>{record.student_name}</TableCell>
                 <TableCell>{record.semester}</TableCell>
                 <TableCell>{record.academic_year}</TableCell>
                 <TableCell>{record.gpa}</TableCell>

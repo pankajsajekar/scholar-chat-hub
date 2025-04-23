@@ -52,6 +52,7 @@ export interface Course {
 
 export interface Grade {
   id: number;
+  student_name: string;
   created_at: string;
   updated_at: string;
   is_deleted: boolean;
@@ -68,6 +69,7 @@ export interface Grade {
 
 export interface Attendance {
   id: number;
+  student_name: string;
   created_at: string;
   updated_at: string;
   is_deleted: boolean;
@@ -82,6 +84,7 @@ export interface Attendance {
 
 export interface Internship {
   id: number;
+  student_name: string;
   student_id?: number;
   company?: string;
   position?: string;
@@ -101,6 +104,7 @@ export interface Internship {
 
 export interface Performance {
   id: number;
+  student_name: string;
   created_at: string;
   updated_at: string;
   is_deleted: boolean;
