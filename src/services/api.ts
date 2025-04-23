@@ -42,11 +42,12 @@ export interface Student {
 export interface Course {
   id: number;
   name: string;
-  code: string;
+  course_code: string;
   description?: string;
-  credits: number;
+  credit_hours: number;
+  level?: string;
   department?: string;
-  instructor?: string;
+  instructor_name?: string;
 }
 
 export interface Grade {
