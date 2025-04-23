@@ -15,8 +15,6 @@ import BotTypingIndicator from "./BotTypingIndicator";
 import ChatInput from "./ChatInput";
 import ChatStatusMessage from "./ChatStatusMessage";
 
-type MessageType = { sender: "user" | "bot"; text: string };
-
 export interface ChatDrawerProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -97,7 +95,6 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({ open, onOpenChange }) =>
   }, [open]);
 
   useEffect(() => {
-    // Scroll to bottom on new message
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
