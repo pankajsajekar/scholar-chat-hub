@@ -21,14 +21,7 @@ export const StudentList = ({ students }: StudentListProps) => {
             className="cursor-pointer hover:bg-blue-50"
             onClick={() => navigate(`/students/${student.id}`)}
           >
-            <TableCell className="font-medium flex items-center gap-2">
-              {student.profile_picture && (
-                <img
-                  src={student.profile_picture}
-                  alt={student.name}
-                  className="w-8 h-8 rounded-full object-cover border"
-                />
-              )}
+            <TableCell className="font-medium">
               {student.name}
             </TableCell>
             <TableCell>{student.email}</TableCell>
