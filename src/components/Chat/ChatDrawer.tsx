@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from "react";
 import {
   Sheet,
@@ -117,13 +116,12 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({ open, onOpenChange }) =>
     }
   };
 
-  // Use Sheet as right-side drawer, ~1/3 width across breakpoints
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side="right"
-        className="p-0 flex flex-col h-screen max-w-full w-[96vw] sm:w-[70vw] md:w-[38vw] lg:w-[33vw] xl:w-[32vw] shadow-2xl border-l bg-background"
-        // Consistent ~1/3 width at md/larger, almost full for mobile
+        className="p-0 flex flex-col h-screen max-w-full w-[96vw] sm:w-[70vw] md:w-[50vw] lg:w-[45vw] xl:w-[40vw] shadow-2xl border-l bg-background"
+        // Updated width classes to be around 40% of screen width
       >
         <SheetHeader className="flex flex-row items-center gap-2 border-b pb-1 px-3 pt-2">
           <div className="flex items-center gap-2">
@@ -214,4 +212,3 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({ open, onOpenChange }) =>
 };
 
 export default ChatDrawer;
-
