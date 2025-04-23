@@ -128,13 +128,13 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({ open, onOpenChange }) =>
         <SheetHeader className="flex flex-row items-center gap-2 border-b pb-1 px-3 pt-2">
           <div className="flex items-center gap-2">
             <Bot className="w-5 h-5 text-primary" />
-            <SheetTitle className="flex-1 text-xl">Chatbot</SheetTitle>
+            <SheetTitle className="flex-1 text-xl">ChatHub</SheetTitle>
           </div>
-          <SheetClose asChild>
+          {/* <SheetClose asChild>
             <Button variant="ghost" size="icon" aria-label="Close">
               ×
             </Button>
-          </SheetClose>
+          </SheetClose> */}
         </SheetHeader>
         {showStatusMsg && (
           <div
