@@ -40,19 +40,19 @@ const Courses = () => {
             <TableRow>
               <TableHead>Code</TableHead>
               <TableHead>Name</TableHead>
-              <TableHead>Credits</TableHead>
               <TableHead>Department</TableHead>
               <TableHead>Instructor</TableHead>
+              <TableHead>level</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {courses?.map((course) => (
               <TableRow key={course.id}>
-                <TableCell className="font-medium">{course.code}</TableCell>
+                <TableCell className="font-medium">{course.course_code}</TableCell>
                 <TableCell>{course.name}</TableCell>
-                <TableCell>{course.credits}</TableCell>
                 <TableCell>{course.department || "N/A"}</TableCell>
-                <TableCell>{course.instructor || "N/A"}</TableCell>
+                <TableCell>{course.instructor_name || "N/A"}</TableCell>
+                <TableCell>{course.level || "N/A"}</TableCell>
               </TableRow>
             ))}
           </TableBody>
