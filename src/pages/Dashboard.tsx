@@ -1,9 +1,10 @@
-
 import { useEffect, useState } from "react";
 import MainLayout from "@/components/Layout/MainLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, ChartBar, GraduationCap, CalendarDays, BookOpen } from "lucide-react";
+import { Users, ChartBar, GraduationCap, CalendarDays, BookOpen, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import ChatDrawer from "@/components/Chat/ChatDrawer";
 
 type DashboardStats = {
   total_students: number;
@@ -17,6 +18,7 @@ type DashboardStats = {
 const Dashboard = () => {
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -39,6 +41,10 @@ const Dashboard = () => {
     <MainLayout>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-gray-800">Dashboard</h1>
+        <Button variant="outline" onClick={() => setIsChatOpen(true)}>
+          <MessageSquare className="mr-2 h-4 w-4" />
+          Chat Assistant
+        </Button>
       </div>
       <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-4">
         <Link to="/students" className="group cursor-pointer">
@@ -150,6 +156,7 @@ const Dashboard = () => {
           </Card>
         </Link>
       </div>
+      <ChatDrawer open={isChatOpen} onOpenChange={setIsChatOpen} />
     </MainLayout>
   );
 };

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MessageSquare, Users, Search, Book, Award, Calendar, TrendingUp, Briefcase, GraduationCap, BookOpen } from "lucide-react";
@@ -40,7 +39,6 @@ const Navbar = () => {
           </Button>
         </div>
 
-        {/* Navigation links */}
         <div className="flex items-center md:order-1">
           <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
             <li>
@@ -99,15 +97,12 @@ const Navbar = () => {
                 Internships
               </Link>
             </li>
-            {/* Chat Assistant only shows in Navbar, NOT here for mobile */}
           </ul>
         </div>
       </div>
-      {/* Only one place for the Chat Assistant Drawer, inside Navbar for global use */}
       <ChatDrawer open={isChatOpen} onOpenChange={setIsChatOpen} />
     </nav>
   );
 };
 
 export default Navbar;
-
