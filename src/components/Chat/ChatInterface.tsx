@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import chatService from "@/services/chatService";
-import { Send, X } from "lucide-react";
+import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
+import ReactMarkdown from "react-markdown";
 
 interface Message {
   id: string;
@@ -126,10 +127,21 @@ const ChatInterface = () => {
                 className={`max-w-[80%] rounded-lg p-3 ${
                   message.sender === 'user'
                     ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted'
+                    : 'bg-muted prose prose-sm max-w-none'
                 }`}
               >
-                <p className="text-sm">{message.text}</p>
+                {message.sender === 'bot' ? (
+                  <ReactMarkdown className="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
+                    {message.text}
+                  </ReactMarkdown>
+                ) : (
+                  message.text.split("\n").map((line, i) => (
+                    <span key={i}>
+                      {line}
+                      {i < message.text.split("\n").length - 1 ? <br /> : null}
+                    </span>
+                  ))
+                )}
                 <p className="text-xs opacity-70 mt-1">
                   {message.timestamp.toLocaleTimeString([], {
                     hour: '2-digit',
