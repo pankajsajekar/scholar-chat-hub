@@ -127,7 +127,7 @@ const ChatInterface = () => {
                 className={`max-w-[80%] rounded-lg p-3 ${
                   message.sender === 'user'
                     ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted prose prose-sm max-w-none'
+                    : 'bg-muted prose prose-sm max-w-none [&_table]:border-collapse [&_table]:w-full [&_th]:border [&_th]:border-gray-300 [&_th]:p-2 [&_td]:border [&_td]:border-gray-300 [&_td]:p-2'
                 }`}
               >
                 {message.sender === 'bot' ? (
