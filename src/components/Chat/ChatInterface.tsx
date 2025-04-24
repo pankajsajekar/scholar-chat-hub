@@ -127,7 +127,7 @@ const ChatInterface = () => {
                 className={`max-w-[80%] rounded-lg p-3 ${
                   message.sender === 'user'
                     ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted prose prose-sm max-w-none [&_table]:border-collapse [&_table]:w-full [&_th]:border [&_th]:border-gray-300 [&_th]:p-2 [&_td]:border [&_td]:border-gray-300 [&_td]:p-2'
+                    : 'bg-muted prose prose-sm max-w-none dark:prose-invert [&_table]:border-collapse [&_table]:w-full [&_th]:border [&_th]:border-gray-300 [&_th]:p-2 [&_td]:border [&_td]:border-gray-300 [&_td]:p-2 [&_pre]:bg-gray-800 [&_pre]:p-2 [&_pre]:rounded [&_code]:text-sm [&_blockquote]:border-l-4 [&_blockquote]:border-gray-300 [&_blockquote]:pl-4 [&_blockquote]:italic [&_ul]:list-disc [&_ol]:list-decimal [&_li]:ml-4 [&_hr]:my-4 [&_p]:my-2 [&_h1]:text-xl [&_h2]:text-lg [&_h3]:text-base [&_img]:rounded-lg [&_img]:max-w-full [&_a]:text-blue-500 [&_a]:underline'
                 }`}
               >
                 {message.sender === 'bot' ? (
@@ -151,19 +151,6 @@ const ChatInterface = () => {
               </div>
             </div>
           ))}
-          
-          {!isConnected && messages.length === 0 && !connectionError && (
-            <div className="flex justify-center items-center h-96">
-              <div className="text-center text-muted-foreground">
-                <p>Connecting to chat service...</p>
-                <div className="mt-2 animate-pulse flex space-x-1 justify-center">
-                  <div className="w-2 h-2 bg-muted-foreground rounded-full"></div>
-                  <div className="w-2 h-2 bg-muted-foreground rounded-full"></div>
-                  <div className="w-2 h-2 bg-muted-foreground rounded-full"></div>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </ScrollArea>
       
