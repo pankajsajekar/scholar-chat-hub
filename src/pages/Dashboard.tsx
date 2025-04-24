@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import MainLayout from "@/components/Layout/MainLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, ChartBar, GraduationCap, CalendarDays, BookOpen, MessageSquare } from "lucide-react";
+import { Users, ChartBar, GraduationCap, CalendarDays, BookOpen, MessageSquare, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ChatInterface from "@/components/Chat/ChatInterface";
@@ -157,8 +157,16 @@ const Dashboard = () => {
         </Link>
       </div>
       {isChatOpen && (
-        <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm">
-          <div className="fixed inset-x-4 top-4 bottom-4 z-50 rounded-lg border bg-background shadow-lg md:left-auto md:right-4 md:w-1/2">
+        <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm flex items-center justify-center">
+          <div className="relative w-[90%] max-w-3xl h-[80vh] bg-background rounded-lg border shadow-lg">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute right-2 top-2 z-50"
+              onClick={() => setIsChatOpen(false)}
+            >
+              <X className="h-4 w-4" />
+            </Button>
             <ChatInterface />
           </div>
         </div>
