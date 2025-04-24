@@ -1,13 +1,11 @@
-
 import { useState, useEffect, useRef } from "react";
 import chatService from "@/services/chatService";
 import { Send, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent } from "@/components/ui/card";
+import { Textarea } from "@/components/ui/textarea";
 
 interface Message {
   id: string;
@@ -23,7 +21,6 @@ const ChatInterface = () => {
   const [connectionError, setConnectionError] = useState<string | null>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   
-  // Connect to WebSocket when component mounts
   useEffect(() => {
     const connect = () => {
       chatService.connect({
@@ -38,7 +35,6 @@ const ChatInterface = () => {
         onOpen: () => {
           setIsConnected(true);
           setConnectionError(null);
-          // Add welcome message
           const welcomeMessage: Message = {
             id: crypto.randomUUID(),
             sender: 'bot',
@@ -55,13 +51,11 @@ const ChatInterface = () => {
     
     connect();
     
-    // Cleanup on unmount
     return () => {
       chatService.disconnect();
     };
   }, []);
   
-  // Auto-scroll to bottom when messages change
   useEffect(() => {
     if (scrollAreaRef.current) {
       scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
@@ -71,7 +65,6 @@ const ChatInterface = () => {
   const handleSendMessage = () => {
     if (!inputMessage.trim() || !isConnected) return;
     
-    // Create user message
     const userMessage: Message = {
       id: crypto.randomUUID(),
       sender: 'user',
@@ -79,13 +72,10 @@ const ChatInterface = () => {
       timestamp: new Date()
     };
     
-    // Add to messages
     setMessages((prev) => [...prev, userMessage]);
     
-    // Send via WebSocket
     chatService.sendMessage(inputMessage);
     
-    // Clear input
     setInputMessage("");
   };
   
@@ -97,7 +87,7 @@ const ChatInterface = () => {
   };
   
   return (
-    <Card className="h-[600px] flex flex-col">
+    <Card className="h-full flex flex-col">
       <div className="p-3 border-b flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <Avatar className="h-8 w-8">
@@ -115,9 +105,6 @@ const ChatInterface = () => {
             </p>
           </div>
         </div>
-        <Button variant="ghost" size="icon">
-          <X className="h-4 w-4" />
-        </Button>
       </div>
       
       {connectionError && (
@@ -126,7 +113,7 @@ const ChatInterface = () => {
         </div>
       )}
       
-      <ScrollArea className="flex-1 p-4" ref={scrollAreaRef}>
+      <ScrollArea className="flex-1 p-4 overflow-y-auto" ref={scrollAreaRef}>
         <div className="space-y-4">
           {messages.map((message) => (
             <div
@@ -168,7 +155,7 @@ const ChatInterface = () => {
         </div>
       </ScrollArea>
       
-      <CardContent className="p-3 border-t">
+      <div className="p-3 border-t">
         <div className="flex space-x-2">
           <Textarea
             placeholder="Type your message..."
@@ -186,7 +173,7 @@ const ChatInterface = () => {
             <Send className="h-4 w-4" />
           </Button>
         </div>
-      </CardContent>
+      </div>
     </Card>
   );
 };
