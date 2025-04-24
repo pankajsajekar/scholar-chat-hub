@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, ChartBar, GraduationCap, CalendarDays, BookOpen, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import ChatDrawer from "@/components/Chat/ChatDrawer";
+import ChatInterface from "@/components/Chat/ChatInterface";
 
 type DashboardStats = {
   total_students: number;
@@ -156,7 +156,13 @@ const Dashboard = () => {
           </Card>
         </Link>
       </div>
-      <ChatDrawer open={isChatOpen} onOpenChange={setIsChatOpen} />
+      {isChatOpen && (
+        <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm">
+          <div className="fixed inset-x-4 top-4 bottom-4 z-50 rounded-lg border bg-background shadow-lg md:left-auto md:right-4 md:w-1/2">
+            <ChatInterface />
+          </div>
+        </div>
+      )}
     </MainLayout>
   );
 };
