@@ -1,6 +1,7 @@
 
 import React from "react";
 import { cn } from "@/lib/utils";
+import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 
 export type MessageType = { sender: "user" | "bot"; text: string };
@@ -22,7 +23,7 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({ messages }) => (
         )}
       >
         {msg.sender === "bot" ? (
-          <ReactMarkdown className="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
+          <ReactMarkdown remarkPlugins={[remarkGfm]} className="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
             {msg.text}
           </ReactMarkdown>
         ) : (

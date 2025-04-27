@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
+import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 
 interface Message {
@@ -131,7 +132,7 @@ const ChatInterface = () => {
                 }`}
               >
                 {message.sender === 'bot' ? (
-                  <ReactMarkdown className="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]} className="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
                     {message.text}
                   </ReactMarkdown>
                 ) : (
