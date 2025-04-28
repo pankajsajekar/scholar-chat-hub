@@ -122,7 +122,7 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({ open, onOpenChange }) =>
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side="right"
-        className="p-0 flex flex-col h-screen max-w-full w-[96vw] sm:w-[70vw] md:w-[38vw] lg:w-[33vw] xl:w-[32vw] shadow-2xl border-l bg-background"
+        className="p-0 flex flex-col h-screen max-w-full w-[96vw] sm:w-[70vw] md:w-[38vw] lg:w-[35vw] xl:w-[40vw] shadow-2xl border-l bg-background"
         // Consistent ~1/3 width at md/larger, almost full for mobile
       >
         <SheetHeader className="flex flex-row items-center gap-2 border-b pb-1 px-3 pt-2">
@@ -149,13 +149,13 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({ open, onOpenChange }) =>
           </div>
         )}
         <div className="flex flex-col flex-1 pb-2 min-h-0 h-0">
-          <ScrollArea ref={scrollRef} className="flex-1 pr-2 overflow-y-auto">
+          <ScrollArea ref={scrollRef} className="flex-1 pr-2  ps-4 overflow-y-auto">
             <div className="flex flex-col gap-2 py-2">
               {messages.map((msg, idx) => (
                 <div
                   key={idx}
                   className={cn(
-                    "max-w-[80%] px-3 py-2 rounded-lg text-sm break-words",
+                    "max-w-[80%] px-3 bg-red-500  py-2 rounded-lg text-sm break-words",
                     msg.sender === "bot"
                       ? "self-start bg-muted border border-gray-200 shadow"
                       : "self-end bg-primary text-primary-foreground"
@@ -182,7 +182,7 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({ open, onOpenChange }) =>
             </div>
           </ScrollArea>
           <form
-            className="flex items-center gap-2 mt-auto px-2 py-2 border-t"
+            className="flex items-center gap-2 mt-auto px-2 py-2 border-t ps-3"
             onSubmit={e => {
               e.preventDefault();
               sendMessage();
