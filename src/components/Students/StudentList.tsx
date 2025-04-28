@@ -22,13 +22,13 @@ export const StudentList = ({ students }: StudentListProps) => {
             onClick={() => navigate(`/students/${student.id}`)}
           >
             <TableCell className="font-medium flex items-center gap-2">
-              {student.profile_picture && (
+              {/* {student.profile_picture && (
                 <img
                   src={student.profile_picture}
                   alt={student.name}
                   className="w-8 h-8 rounded-full object-cover border"
                 />
-              )}
+              )} */}
               {student.name}
             </TableCell>
             <TableCell>{student.email}</TableCell>
