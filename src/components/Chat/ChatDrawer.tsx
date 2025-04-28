@@ -111,7 +111,7 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({ open, onOpenChange }) =>
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side="right"
-        className="p-0 flex flex-col h-screen w-1/2 shadow-2xl border-l bg-background"
+        className="p-2 flex flex-col h-screen w-[40%] shadow-2xl border-l bg-background"
       >
         <SheetHeader className="flex flex-row items-center gap-2 border-b pb-1 px-3 pt-2">
           <div className="flex items-center gap-2">
